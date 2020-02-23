@@ -13,5 +13,8 @@ public interface ReferralUtilityRepository extends MongoRepository<Referral, Str
 	
 	List<Referral> findByStateAndLineAndCompany(String state, String line, String company);
 	
+	List findAllById(String string);
+
+	List deleteByreferralCode(String referralCode);
 	
 }
