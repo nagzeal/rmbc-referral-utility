@@ -10,44 +10,53 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.utility.referral.application.model.Referral;
 import com.utility.referral.application.repository.ReferralUtilityRepository;
 
-
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@RequestMapping("/referral-service")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 public class ReferralUtilityController {
-	
+
 	@Autowired
 	private ReferralUtilityRepository repository;
-	
-	@GetMapping("/fetchReferral/{referralCode}")
-	public Optional<Referral> fetchReferral(@PathVariable String referralCode) {
-		return repository.findByReferralCode(referralCode);
+
+	@GetMapping("/fetchReferral/{id}")
+	public Optional<Referral> fetchReferral(@PathVariable String id) {
+		return repository.findById(id);
 	}
-	
+
 	@PostMapping("/createRef")
 	public void createReferral(@RequestBody Referral referral) {
-		Referral myReferral = repository.save(referral);
-		System.out.println("Referral Created Successfully..."+myReferral.toString());
+		repository.save(referral);
 
 	}
-	
+
 	@GetMapping("/getAllReferrals")
-	public List<Referral> getAllReferrals(){
+	public List<Referral> getAllReferrals() {
 		return repository.findAll();
 	}
-	
+
 	@GetMapping("/getReferralsForProduct/{state}/{line}/{company}")
-	public List<Referral> getReferralForProduct(@PathVariable String state,@PathVariable String line,@PathVariable String company){
+	public List<Referral> getReferralForProduct(@PathVariable String state, @PathVariable String line,
+			@PathVariable String company) {
 		return repository.findByStateAndLineAndCompany(state, line, company);
 	}
-	
+
 	@DeleteMapping("/deleteReferral/{id}")
-	public void deleteReferral(@PathVariable String id) {
+	@CrossOrigin(origins = "*",methods =RequestMethod.DELETE)
+	public List<Referral> deleteReferral(@PathVariable String id) {
 		repository.deleteById(id);
+		return repository.findAll();
+
 	}
 
+	@DeleteMapping("/deleteAllReferral")
+	public void deleteAllReferral() {
+		repository.deleteAll();
+	}
 }
