@@ -7,8 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
+
 
 @Document(collection = "Referral")
 public class Referral {
@@ -46,6 +45,62 @@ public class Referral {
 	public String toString() {
 		return "Referral [id=" + id + ", referralCode=" + referralCode + ", referralReason=" + referralReason
 				+ ", state=" + state + ", line=" + line + ", company=" + company + ", status=" + status + "]";
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getReferralCode() {
+		return referralCode;
+	}
+
+	public void setReferralCode(String referralCode) {
+		this.referralCode = referralCode;
+	}
+
+	public String getReferralReason() {
+		return referralReason;
+	}
+
+	public void setReferralReason(String referralReason) {
+		this.referralReason = referralReason;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getLine() {
+		return line;
+	}
+
+	public void setLine(String line) {
+		this.line = line;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 }
